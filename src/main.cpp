@@ -12,12 +12,12 @@ int main(){
     matrix_init(a,rows,cols);
     
 
-    a->matrix[0][0] = 1;
+    a->matrix[0][0] = 0;
     a->matrix[0][1] = 2;
     a->matrix[0][2] = 1;
 
-    a->matrix[1][0] = 1;
-    a->matrix[1][1] = 4;
+    a->matrix[1][0] = 0;
+    a->matrix[1][1] = 0;
     a->matrix[1][2] = 4;
 
     a->matrix[2][0] = 3;
@@ -31,11 +31,15 @@ int main(){
     // printMtx(b);
     
 
+
+    sort(a);
     b = roots(a);
 
+    printMtx(a);
     printMtx(b);
 
-    matrix_delete(b);
+
+    //matrix_delete(b);
     matrix_delete(a);
     
 

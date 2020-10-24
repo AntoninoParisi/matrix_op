@@ -84,12 +84,33 @@ void printMtx(matr * a){ // simply and usefull
 
 }
 
-matr * sort(matr * a){ // next push
+void sort(matr * a){ 
+
+    int count =0;
+    for(int j = 0;j < a->width;j++)
+        for(int i=0; i < a->length ;i++)
+            if( i == j && a->matrix[j][i] == 0)
+                {
+                    double tmp = 0;
+
+                    for(int k = 0; k < a->width;k++) // swapping rows
+                        {
+                            tmp = a->matrix[i][k];
+                            a->matrix[i][k] = a->matrix[i+1+count][k];
+                            a->matrix[i+1+count][k] = tmp;
+                        }
+                    count++;
+                    i--; // turn back and check
+                }
+                else // the element is > 0
+                {
+                    count = 0;
+                }
+                
 
 
 
 
-    return NULL;
 }
 
 
