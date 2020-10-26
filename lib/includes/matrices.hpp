@@ -5,7 +5,7 @@
 #include <cmath>
 
 /**
- * @Author Antonino Parisi
+ * @Author Antonino Parisi 
  * 
  * */
 struct matr{

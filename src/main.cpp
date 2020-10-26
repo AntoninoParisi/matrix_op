@@ -9,7 +9,7 @@ int main(){
     
     matr * b ;//= new matr;
 
-    matrix_init(a,rows,cols);
+    matrix_init(a,rows,cols); // allocating the matrix dinamically
     
 
     a->matrix[0][0] = 0;
