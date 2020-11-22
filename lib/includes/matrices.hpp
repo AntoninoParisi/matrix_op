@@ -1,6 +1,3 @@
-
-
-
 #include <iostream>
 #include <cmath>
 
@@ -40,8 +37,6 @@ void matrix_init(matr * a,int rows,int cols){ // simply and usefull
 
 void matrix_delete(matr * a){ // remeber to delete all dynamic structures allocated 
 
-    
-    
     for(int index =0;index<a->length;index++)
         delete [] a->matrix[index];
     delete [] a->matrix;
@@ -73,7 +68,7 @@ matr * sum(matr * a, matr * b){ // summation of matrix
 
 void printMtx(matr * a){ // simply and usefull
     
-    for(int i =0;i<a->length; i++){
+    for(int i =0;i < a->length; i++){
         std::cout << "[" ;
         for(int j=0;j<a->width;j++){
             std::cout << a->matrix[i][j];
@@ -84,6 +79,7 @@ void printMtx(matr * a){ // simply and usefull
 
 }
 
+// sorting by pivot 
 void sort(matr * a){ 
 
     int count =0;
@@ -107,13 +103,9 @@ void sort(matr * a){
                     count = 0;
                 }
                 
-
-
-
-
 }
 
-
+// gauss alg.
 matr * upper_triangular(matr * a){
     matr * b = (a);
 
@@ -151,4 +143,71 @@ matr * roots(matr * a){
    
     return c;
 }
+
+// reshape the input matrix
+// avoiding the column where the det is calculated
+matr * reshape(matr * a,int row,int col,int order){
+    matr * b = new matr;
+    matrix_init(b,order,order);
+    int x = 0,y=0;
+    
+
+    for(int i = 1;i < a->length;i++){ 
+        for(int j = 0;j < a->width;j++)
+        {
+          
+            if(j!=col) // the column to avoid
+            {
+                b->matrix[x][y++] = a->matrix[i][j];
+            }
+
+        }
+        x++;
+        y=0;
+    }
+
+
+
+
+return b;
+}
+
+
+// determinant of matrix nb -> only NxN
+double det(matr * a,int row,int col,int order){
+    
+    float res = 0.0;
+
+    if(a->length != a->width){
+        std::cout << "This isn't a squared matrix!" << std::endl;
+        return 0;
+    }
+    
+    if(order > 2) 
+    {
+       
+            for(int f = 0; f < order;f++){
+           
+
+                    matr * b = reshape(a,row,f,order-1);
+
+                    res = res + std::pow(-1,f+row)*a->matrix[row][f]*det(b,0,0,order-1);
+                    matrix_delete(b); // avoiding memory leaks
+            }
+
+    }
+    else
+    {
+
+            res =  a->matrix[0][0] * a->matrix[1][1] - a->matrix[1][0] * a->matrix[0][1];
+     
+    }
+    
+
+
+    return res;
+
+}
+
+
 
